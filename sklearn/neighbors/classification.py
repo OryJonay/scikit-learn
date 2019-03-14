@@ -127,8 +127,10 @@ class KNeighborsClassifier(NeighborsBase, KNeighborsMixin,
             algorithm=algorithm,
             leaf_size=leaf_size, metric=metric, p=p,
             metric_params=metric_params,
-            n_jobs=n_jobs, **kwargs)
+            n_jobs=n_jobs)
         self.weights = _check_weights(weights)
+        for attribute, value in kwargs.items():
+            setattr(self, attribute, value)
 
     def predict(self, X):
         """Predict the class labels for the provided data
